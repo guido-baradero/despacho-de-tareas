@@ -1,0 +1,142 @@
+[
+    {
+        "idProducto": "1-0001",
+        "material": "Cable THHN 12 AWG",
+        "descripcion": "Cable eléctrico de cobre de 12 AWG, 100 metros",
+        "cantidad": 500,
+        "cantidadMin": 100
+    },
+    {
+        "idProducto": "1-0002",
+        "material": "Cable THHN 14 AWG",
+        "descripcion": "Cable eléctrico de cobre de 14 AWG, 100 metros",
+        "cantidad": 400,
+        "cantidadMin": 80
+    },
+    {
+        "idProducto": "1-0003",
+        "material": "Tubo Conduit PVC 1/2\\",
+        "descripcion": "Tubo plástico de 1/2 pulgda",
+        "cantidad": 150,
+        "cantidadMin": 30
+    },
+    {
+        "idProducto": "1-0004",
+        "material": "Caja de distribución",
+        "descripcion": "Caja de distribución de 4x4 pulgadas",
+        "cantidad": 50,
+        "cantidadMin": 10
+    },
+    {
+        "idProducto": "1-0005",
+        "material": "Interruptor simple",
+        "descripcion": "Interruptor de encendido/apagado simple",
+        "cantidad": 200,
+        "cantidadMin": 40
+    },
+    {
+        "idProducto": "1-0006",
+        "material": "Tomacorriente doble",
+        "descripcion": "Tomacorriente de 20A doble",
+        "cantidad": 180,
+        "cantidadMin": 36
+    },
+    {
+        "idProducto": "1-0007",
+        "material": "Tapa ciega",
+        "descripcion": "Tapa ciega para cajas de distribución",
+        "cantidad": 300,
+        "cantidadMin": 60
+    },
+    {
+        "idProducto": "1-0008",
+        "material": "Tablero eléctrico",
+        "descripcion": "Tablero eléctrico para 8 circuitos",
+        "cantidad": 20,
+        "cantidadMin": 5
+    },
+    {
+        "idProducto": "1-0009",
+        "material": "Breaker 15A",
+        "descripcion": "Interruptor termomagnético de 15A",
+        "cantidad": 100,
+        "cantidadMin": 20
+    },
+    {
+        "idProducto": "1-0010",
+        "material": "Breaker 20A",
+        "descripcion": "Interruptor termomagnético de 20A",
+        "cantidad": 100,
+        "cantidadMin": 20
+    },
+    {
+        "idProducto": "1-0011",
+        "material": "Breaker 30A",
+        "descripcion": "Interruptor termomagnético de 30A",
+        "cantidad": 50,
+        "cantidadMin": 10
+    },
+    {
+        "idProducto": "1-0012",
+        "material": "Fusible de cartucho",
+        "descripcion": "Fusible de cartucho de 10A",
+        "cantidad": 200,
+        "cantidadMin": 50
+    },
+    {
+        "idProducto": "1-0013",
+        "material": "Regleta de conexión",
+        "descripcion": "Regleta de conexión de 12 terminales",
+        "cantidad": 120,
+        "cantidadMin": 24
+    },
+    {
+        "idProducto": "1-0014",
+        "material": "Cinta aislante",
+        "descripcion": "Cinta aislante de PVC, 19 mm x 20 m",
+        "cantidad": 500,
+        "cantidadMin": 100
+    },
+    {
+        "idProducto": "1-0015",
+        "material": "Conector rápido",
+        "descripcion": "Conector rápido de 3 vías",
+        "cantidad": 300,
+        "cantidadMin": 60
+    },
+    {
+        "idProducto": "1-0016",
+        "material": "Lámpara LED",
+        "descripcion": "Lámpara LED de 18W, luz blanca",
+        "cantidad": 100,
+        "cantidadMin": 20
+    },
+    {
+        "idProducto": "1-0017",
+        "material": "Placa decorativa",
+        "descripcion": "Placa decorativa para interruptores",
+        "cantidad": 200,
+        "cantidadMin": 40
+    },
+    {
+        "idProducto": "1-0018",
+        "material": "Detector de humo",
+        "descripcion": "Detector de humo con batería de 9V",
+        "cantidad": 50,
+        "cantidadMin": 10
+    },
+    {
+        "idProducto": "1-0019",
+        "material": "Timbre eléctrico",
+        "descripcion": "Timbre eléctrico con botón pulsador",
+        "cantidad": 60,
+        "cantidadMin": 12
+    },
+    {
+        "idProducto": "1-0020",
+        "material": "Transformador 120V a 24V",
+        "descripcion": "Transformador para timbres, entrada 120V, salida 24V",
+        "cantidad": 40,
+        "cantidadMin": 8
+    }
+]

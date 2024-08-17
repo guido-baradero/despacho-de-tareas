@@ -1,0 +1,102 @@
+[
+    {
+        "idTarea": "T-0001",
+        "titulo": "Instalación de lámpara LED",
+        "descripcion": "Instalación y conexión de lámpara LED en el techo.",
+        "materialNecesario": [
+            "Cable THHN 12 AWG",
+            "Lámpara LED",
+            "Tubo Conduit PVC 1/2\\"
+        ]
+    },
+    {
+        "idTarea": "T-0002",
+        "titulo": "Cambio de tablero eléctrico",
+        "descripcion": "Reemplazo de tablero eléctrico en cuadro de distribución.",
+        "materialNecesario": [
+            "Tablero eléctrico",
+            "Breaker 20A",
+            "Caja de distribución"
+        ]
+    },
+    {
+        "idTarea": "T-0003",
+        "titulo": "Instalación de tomacorriente",
+        "descripcion": "Instalación de tomacorriente doble en pared.",
+        "materialNecesario": [
+            "Cable THHN 14 AWG",
+            "Tomacorriente doble",
+            "Caja de distribución"
+        ]
+    },
+    {
+        "idTarea": "T-0004",
+        "titulo": "Instalación de timbre eléctrico",
+        "descripcion": "Instalación de timbre eléctrico en entrada principal.",
+        "materialNecesario": [
+            "Timbre eléctrico",
+            "Transformador 120V a 24V",
+            "Cable THHN 14 AWG"
+        ]
+    },
+    {
+        "idTarea": "T-0005",
+        "titulo": "Conexión de detector de humo",
+        "descripcion": "Conexión de detector de humo en cocina.",
+        "materialNecesario": [
+            "Detector de humo",
+            "Cable THHN 14 AWG",
+            "Regleta de conexión"
+        ]
+    },
+    {
+        "idTarea": "T-0006",
+        "titulo": "Instalación de interruptor",
+        "descripcion": "Instalación de interruptor simple en habitación.",
+        "materialNecesario": [
+            "Interruptor simple",
+            "Cable THHN 12 AWG",
+            "Placa decorativa"
+        ]
+    },
+    {
+        "idTarea": "T-0007",
+        "titulo": "Instalación de breaker",
+        "descripcion": "Instalación de breaker en tablero eléctrico.",
+        "materialNecesario": [
+            "Breaker 15A",
+            "Cable THHN 12 AWG",
+            "Caja de distribución"
+        ]
+    },
+    {
+        "idTarea": "T-0008",
+        "titulo": "Montaje de tubo Conduit",
+        "descripcion": "Instalación de tubo Conduit en muro.",
+        "materialNecesario": [
+            "Tubo Conduit PVC 1/2\\",
+            "Caja de distribución",
+            "Cinta aislante"
+        ]
+    },
+    {
+        "idTarea": "T-0009",
+        "titulo": "Instalación de fusibles",
+        "descripcion": "Instalación de fusibles en tablero principal.",
+        "materialNecesario": [
+            "Fusible de cartucho",
+            "Regleta de conexión",
+            "Caja de distribución"
+        ]
+    },
+    {
+        "idTarea": "T-0010",
+        "titulo": "Conexión de placa decorativa",
+        "descripcion": "Colocación de placa decorativa en interruptor.",
+        "materialNecesario": [
+            "Placa decorativa",
+            "Interruptor simple",
+            "Cinta aislante"
+        ]
+    }
+]
