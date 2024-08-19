@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.getElementById('bienvenidaUsuario').textContent = `Esta es la hoja de ruta de ${operadorLogueado.nombre} ${operadorLogueado.apellido}`;
-
     const ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
     const ordenesOperador = ordenes.filter(orden => orden.operador === operadorLogueado.idUsuario);
 
-    // Limpiar contenedores de turnos
+    console.log("Órdenes del operador:", ordenesOperador);
+
     for (let i = 1; i <= 5; i++) {
         const contenedorTurno = document.getElementById(`turno${i}`);
         if (contenedorTurno) {
@@ -29,14 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Renderizar las órdenes
     ordenesOperador.forEach(orden => {
         const { turno, idOrden, tarea, descripcion, despachante, comentario } = orden;
-        if (!turno || turno < 1 || turno > 5) {
-            console.error(`Turno inválido para la orden ${idOrden}`);
-            return;
-        }
-
         const card = document.createElement('div');
         card.className = 'card mb-4';
         card.style.width = '18rem';
@@ -60,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <button class="btn btn-warning btnReagendar">Reagendar</button>
             </div>
         `;
-
         const contenedorTurno = document.getElementById(`turno${turno}`);
         if (contenedorTurno) {
             contenedorTurno.appendChild(card);
@@ -69,12 +62,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Manejo de eventos para los botones
     document.querySelectorAll('.btnCumplirOrden').forEach(button => {
         button.addEventListener('click', function (event) {
             const card = event.currentTarget.closest('.card');
             const idOrden = card.querySelector('.card-header').textContent.split(': ')[1];
-            cumplirOrden(idOrden, operadorLogueado);
+            console.log(`Cumpliendo la orden con id: ${idOrden}`);
+            cumplirOrden(parseInt(idOrden, 10));
         });
     });
 
@@ -82,55 +75,88 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function (event) {
             const card = event.currentTarget.closest('.card');
             const idOrden = card.querySelector('.card-header').textContent.split(': ')[1];
-            reagendarOrden(idOrden, operadorLogueado);
+            console.log(`Reagendando la orden con id: ${idOrden}`);
+            reagendarOrden(parseInt(idOrden, 10));
         });
     });
 
-    function cumplirOrden(idOrden, operadorLogueado) {
+    function cumplirOrden(idOrden) {
         let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
         let ordenCumplida = ordenes.find(orden => orden.idOrden === idOrden);
         if (!ordenCumplida) {
             console.error(`No se encontró la orden con id ${idOrden}`);
             return;
         }
+
         ordenes = ordenes.map(orden => {
             if (orden.idOrden === idOrden) {
                 return { ...orden, estado: 'cumplida' };
             }
             return orden;
         });
+
         localStorage.setItem('ordenes', JSON.stringify(ordenes));
+        console.log(`Orden ${idOrden} cumplida. Estado actualizado en localStorage.`);
+
+        actualizarVista(idOrden, 'cumplida');
+
         let historialOrdenesCumplidas = JSON.parse(localStorage.getItem('historialOrdenesCumplidas')) || [];
         historialOrdenesCumplidas.push({
             ...ordenCumplida,
+            estado: 'cumplida',
             despachante: operadorLogueado.nombre,
             operador: operadorLogueado.idUsuario,
         });
         localStorage.setItem('historialOrdenesCumplidas', JSON.stringify(historialOrdenesCumplidas));
+        console.log(`Historial de órdenes cumplidas actualizado:`, historialOrdenesCumplidas);
+
         $('#modalConfirmarCumplimiento').modal('show');
     }
 
-    function reagendarOrden(idOrden, operadorLogueado) {
+    function reagendarOrden(idOrden) {
         let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
         let ordenReasignada = ordenes.find(orden => orden.idOrden === idOrden);
         if (!ordenReasignada) {
             console.error(`No se encontró la orden con id ${idOrden}`);
             return;
         }
+
         ordenes = ordenes.map(orden => {
             if (orden.idOrden === idOrden) {
                 return { ...orden, estado: 'reasignada' };
             }
             return orden;
         });
+
         localStorage.setItem('ordenes', JSON.stringify(ordenes));
+        console.log(`Orden ${idOrden} reasignada. Estado actualizado en localStorage.`);
+
+        actualizarVista(idOrden, 'reasignada');
+
         let historialOrdenesReasignadas = JSON.parse(localStorage.getItem('historialOrdenesReasignadas')) || [];
         historialOrdenesReasignadas.push({
             ...ordenReasignada,
+            estado: 'reasignada',
             despachante: operadorLogueado.nombre,
             operador: operadorLogueado.idUsuario,
         });
         localStorage.setItem('historialOrdenesReasignadas', JSON.stringify(historialOrdenesReasignadas));
+        console.log(`Historial de órdenes reasignadas actualizado:`, historialOrdenesReasignadas);
+
         $('#modalActualizarOrden').modal('show');
+    }
+
+    function actualizarVista(idOrden, estado) {
+        const card = Array.from(document.querySelectorAll('.card')).find(card => card.querySelector('.card-header').textContent.includes(idOrden));
+        if (card) {
+            if (estado === 'cumplida') {
+                card.style.backgroundColor = 'lightgreen';
+            } else if (estado === 'reasignada') {
+                card.style.backgroundColor = 'lightcoral';
+            }
+            console.log(`Vista actualizada para la orden ${idOrden} con estado: ${estado}`);
+        } else {
+            console.error(`No se encontró la tarjeta para la orden ${idOrden} en la vista.`);
+        }
     }
 });

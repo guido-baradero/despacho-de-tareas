@@ -1,18 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
+    let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
+    console.log("Órdenes actuales:", ordenes);
+
+    // Filtrar y mostrar órdenes según su estado
+    const ordenesAsignadas = ordenes.filter(orden => orden.estado === 'asignada');
+    const ordenesCumplidas = ordenes.filter(orden => orden.estado === 'cumplida');
+    const ordenesReasignadas = ordenes.filter(orden => orden.estado === 'reasignada');
+
+    console.log("Órdenes asignadas:", ordenesAsignadas);
+    console.log("Órdenes cumplidas:", ordenesCumplidas);
+    console.log("Órdenes reasignadas:", ordenesReasignadas);
+
+
     const idUsuario = localStorage.getItem('usuarioLogueado');
     if (!idUsuario) {
         console.error('No se encontró el usuario logueado.');
-        window.location.href = '../index.html'; // Redirigir a la página de login si no se encuentra el usuario
+        window.location.href = '../index.html';
         return;
     }
 
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
     let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
-    let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
+    //let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
     const despachanteLogueado = usuarios.find(u => u.idUsuario === idUsuario);
     if (!despachanteLogueado || despachanteLogueado.alcance.toLowerCase() !== 'despachante') {
         console.error('No se encontró el despachante logueado o el usuario no tiene el rol adecuado.');
-        window.location.href = '../index.html'; // Redirigir a la página de login si no se encuentra el despachante o el rol es incorrecto
+        window.location.href = '../index.html';
         return;
     }
 
@@ -23,12 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancelarNuevaOrden = document.getElementById('btnCancelarNuevaOrden');
 
     let operadoresDisponibles = [];
-    let idOrdenCounter = 1; // Contador para IDs de órdenes
-    let nuevaOrden = null; // Inicialmente es null
-    let operadorSeleccionado = null; // Definir operadorSeleccionado
+    let idOrdenCounter = ordenes.length + 1;
+    let nuevaOrden = null;
+    let operadorSeleccionado = null;
 
-    operadoresDisponibles = usuarios.filter(usuario => usuario.alcance === 'operador' && usuario.disponible);
-    idOrdenCounter = ordenes.length + 1; // Inicializar el contador de ID con base en la cantidad de órdenes existentes
+    operadoresDisponibles = usuarios.filter(usuario => usuario.alcance.toLowerCase() === 'operador' && usuario.disponible);
 
     cargarOpciones();
 
@@ -158,49 +170,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.setItem('ordenes', JSON.stringify(ordenes));
             localStorage.setItem('usuarios', JSON.stringify(usuarios));
-            // Llama a la función para mostrar todas las órdenes asignadas
-            mostrarOrdenesPorEstado();
+            mostrarOrdenesPorEstado('asignada');
             nuevaOrden = null;
         } else {
             console.error('Faltan datos para asignar la orden');
         }
     }
 
-    // Función para filtrar y mostrar órdenes según el estado
-
-
-
     function mostrarOrdenesPorEstado(estado) {
-        // Filtra las órdenes por el estado proporcionado
-        const ordenesFiltradas = listadoOrdenes.filter(orden => orden.estado === estado);
+        const ordenesFiltradas = ordenes.filter(orden => orden.estado === estado);
         console.log(`Órdenes en estado ${estado}:`, ordenesFiltradas);
 
-        // Obtener el tbody donde se mostrarán las órdenes
         const tbody = document.getElementById('ordenes-tbody');
-        tbody.innerHTML = ''; // Limpiar el contenido existente
+        tbody.innerHTML = '';
 
-        // Insertar cada orden filtrada como una fila en la tabla
         ordenesFiltradas.forEach(orden => {
             const row = document.createElement('tr');
-
-            // Asegúrate de que 'tarea' sea un array, si no lo es, conviértelo o maneja el caso
             const tareas = Array.isArray(orden.tarea) ? orden.tarea.join(', ') : 'No disponible';
 
             row.innerHTML = `
-            <th scope="row">${orden.idOrden}</th>
-            <td>${tareas}</td>
-            <td>${orden.despachante}</td>
-            <td>${orden.operador}</td>
-        `;
+                <th scope="row">${orden.idOrden}</th>
+                <td>${tareas}</td>
+                <td>${orden.despachante}</td>
+                <td>${orden.operador}</td>
+            `;
             tbody.appendChild(row);
         });
     }
 
-    // Cargar las órdenes desde localStorage al inicio
     let listadoOrdenes = JSON.parse(localStorage.getItem('ordenes')) || [];
     console.log('Listado de órdenes cargadas:', listadoOrdenes);
 
-    // Asignar eventos a los botones
     document.getElementById('btnReasignadas').addEventListener('click', () => {
         mostrarOrdenesPorEstado('reasignada');
     });
@@ -216,9 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnCanceladas').addEventListener('click', () => {
         mostrarOrdenesPorEstado('cancelada');
     });
-
-    // Ejemplo de cómo mostrar las órdenes de diferentes estados
-
 
     mostrarOrdenesPorEstado('asignada');
     mostrarOrdenesPorEstado('reasignada');
@@ -256,32 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
         turnos.addEventListener('click', manejarCambioTurno);
         btnAsignarNuevaOrden.addEventListener('click', asignarNuevaOrden);
         btnCancelarNuevaOrden.addEventListener('click', cancelarNuevaOrden);
-    }
-
-    function mostrarOrdenesPorEstado(estado) {
-        // Filtra las órdenes por el estado proporcionado
-        const ordenesFiltradas = ordenes.filter(orden => orden.estado === estado);
-        console.log(`Órdenes en estado ${estado}:`, ordenesFiltradas);
-
-        // Obtener el tbody donde se mostrarán las órdenes
-        const tbody = document.getElementById('ordenes-tbody');
-        tbody.innerHTML = ''; // Limpiar el contenido existente
-
-        // Insertar cada orden filtrada como una fila en la tabla
-        ordenesFiltradas.forEach(orden => {
-            const row = document.createElement('tr');
-
-            // Asegúrate de que 'tarea' sea un array, si no lo es, conviértelo o maneja el caso
-            const tareas = Array.isArray(orden.tarea) ? orden.tarea.join(', ') : 'No disponible';
-
-            row.innerHTML = `
-                <th scope="row">${orden.idOrden}</th>
-                <td>${tareas}</td>
-                <td>${orden.despachante}</td>
-                <td>${orden.operador}</td>
-            `;
-            tbody.appendChild(row);
-        });
     }
 
     inicializarFormulario();
