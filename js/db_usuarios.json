@@ -9,28 +9,13 @@
         "conectado": false,
         "disponible": false,
         "hojaDeRuta": {
-            "turnos": [
-                {
-                    "turno": 1,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 2,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 3,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 4,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 5,
-                    "estado": "libre"
-                }
-            ],
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
             "despachante": "",
             "orden": [],
             "estadoDeHoja": "disponible",
@@ -44,31 +29,16 @@
         "usuario": "maria.gomez",
         "contrasena": "password123",
         "alcance": "operador",
-        "conectado": true,
-        "disponible": true,
+        "conectado": false,
+        "disponible": false,
         "hojaDeRuta": {
-            "turnos": [
-                {
-                    "turno": 1,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 2,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 3,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 4,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 5,
-                    "estado": "libre"
-                }
-            ],
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
             "despachante": "",
             "orden": [],
             "estadoDeHoja": "disponible",
@@ -85,31 +55,16 @@
         "conectado": true,
         "disponible": true,
         "hojaDeRuta": {
-            "turnos": [
-                {
-                    "turno": 1,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 2,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 3,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 4,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 5,
-                    "estado": "libre"
-                }
-            ],
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
             "despachante": "",
             "orden": [],
-            "estadoDeHoja": "completa",
+            "estadoDeHoja": "disponible",
             "comentarioDeHoja": ""
         }
     },
@@ -120,31 +75,16 @@
         "usuario": "ana.martinez",
         "contrasena": "password123",
         "alcance": "operador",
-        "conectado": false,
-        "disponible": false,
+        "conectado": true,
+        "disponible": true,
         "hojaDeRuta": {
-            "turnos": [
-                {
-                    "turno": 1,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 2,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 3,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 4,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 5,
-                    "estado": "libre"
-                }
-            ],
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
             "despachante": "",
             "orden": [],
             "estadoDeHoja": "disponible",
@@ -158,31 +98,131 @@
         "usuario": "luis.rodriguez",
         "contrasena": "password123",
         "alcance": "operador",
+        "conectado": true,
+        "disponible": true,
+        "hojaDeRuta": {
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
+            "despachante": "",
+            "orden": [],
+            "estadoDeHoja": "disponible",
+            "comentarioDeHoja": ""
+        }
+    },
+    {
+        "idUsuario": "0-0006",
+        "nombre": "Sofía",
+        "apellido": "López",
+        "usuario": "sofia.lopez",
+        "contrasena": "password123",
+        "alcance": "operador",
+        "conectado": true,
+        "disponible": true,
+        "hojaDeRuta": {
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
+            "despachante": "",
+            "orden": [],
+            "estadoDeHoja": "disponible",
+            "comentarioDeHoja": ""
+        }
+    },
+    {
+        "idUsuario": "0-0007",
+        "nombre": "Pedro",
+        "apellido": "García",
+        "usuario": "pedro.garcia",
+        "contrasena": "password123",
+        "alcance": "operador",
+        "conectado": true,
+        "disponible": true,
+        "hojaDeRuta": {
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
+            "despachante": "",
+            "orden": [],
+            "estadoDeHoja": "disponible",
+            "comentarioDeHoja": ""
+        }
+    },
+    {
+        "idUsuario": "0-0008",
+        "nombre": "Lucía",
+        "apellido": "Hernández",
+        "usuario": "lucia.hernandez",
+        "contrasena": "password123",
+        "alcance": "operador",
+        "conectado": true,
+        "disponible": true,
+        "hojaDeRuta": {
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
+            "despachante": "",
+            "orden": [],
+            "estadoDeHoja": "disponible",
+            "comentarioDeHoja": ""
+        }
+    },
+    {
+        "idUsuario": "0-0009",
+        "nombre": "Miguel",
+        "apellido": "Ramírez",
+        "usuario": "miguel.ramirez",
+        "contrasena": "password123",
+        "alcance": "operador",
         "conectado": false,
         "disponible": false,
         "hojaDeRuta": {
-            "turnos": [
-                {
-                    "turno": 1,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 2,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 3,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 4,
-                    "estado": "libre"
-                },
-                {
-                    "turno": 5,
-                    "estado": "libre"
-                }
-            ],
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
+            "despachante": "",
+            "orden": [],
+            "estadoDeHoja": "disponible",
+            "comentarioDeHoja": ""
+        }
+    },
+    {
+        "idUsuario": "0-0010",
+        "nombre": "Elena",
+        "apellido": "Torres",
+        "usuario": "elena.torres",
+        "contrasena": "password123",
+        "alcance": "operador",
+        "conectado": false,
+        "disponible": false,
+        "hojaDeRuta": {
+            "turnos": {
+                "turno1": "libre",
+                "turno2": "libre",
+                "turno3": "libre",
+                "turno4": "libre",
+                "turno5": "libre"
+            },
             "despachante": "",
             "orden": [],
             "estadoDeHoja": "disponible",
@@ -196,8 +236,8 @@
         "usuario": "jose.sanchez",
         "contrasena": "password123",
         "alcance": "despachante",
-        "conectado": true,
-        "disponible": true,
+        "conectado": false,
+        "disponible": false,
         "hojaDeRuta": null
     },
     {

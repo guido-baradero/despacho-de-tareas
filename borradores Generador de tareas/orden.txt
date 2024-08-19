@@ -1,0 +1,2 @@
+pareciera que va queriendo! te recontra agradesco por ahora. pero ahora deberia poder mostrar en pantalla esta orden en el perfil del operador al que se le asigno la orden, este es mi archo hojaDeRuta.js donde intento hacer eso
+

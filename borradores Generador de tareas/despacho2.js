@@ -1,134 +1,3 @@
-/*
-// Cargar operador desde localStorage
-const operador = JSON.parse(localStorage.getItem('operador'));
-console.log('Operador logueado:', operador);
-
-// Convertir turnos a array si es necesario
-if (operador.hojaDeRuta && typeof operador.hojaDeRuta.turnos === 'object') {
-    operador.hojaDeRuta.turnos = Object.keys(operador.hojaDeRuta.turnos).map(key => ({
-        turno: parseInt(key.replace('turno', '')),
-        estado: operador.hojaDeRuta.turnos[key]
-    }));
-}
-console.log('Turnos del operador:', operador.hojaDeRuta.turnos);
-
-// Asignar nueva orden
-function asignarNuevaOrden() {
-    const turnoSeleccionado = parseInt(document.getElementById('selectTurno').value); // Valor del turno seleccionado
-    const tareaSeleccionada = JSON.parse(document.getElementById('tareaSeleccionada').value); // Tarea seleccionada (deberías definir esto según tu aplicación)
-
-    console.log('Turno seleccionado:', turnoSeleccionado);
-    console.log('Tarea seleccionada:', tareaSeleccionada);
-
-    const turnoDisponible = operador.hojaDeRuta.turnos.find(turno => turno.turno === turnoSeleccionado);
-
-    if (turnoDisponible && turnoDisponible.estado === 'libre') {
-        console.log('Turno disponible encontrado:', turnoDisponible);
-
-        // Crear nueva orden
-        const nuevaOrden = {
-            idOrden: Date.now(), // Generar ID único
-            tarea: tareaSeleccionada.idTarea,
-            operador: operador.idUsuario,
-            turno: turnoSeleccionado,
-            despachante: 'José Sánchez', // Ejemplo de despachante
-            estado: 'asignada'
-        };
-
-        console.log('Nueva orden asignada:', nuevaOrden);
-
-        // Aquí podrías guardar la orden en localStorage o enviarla al servidor
-        const ordenesAsignadas = JSON.parse(localStorage.getItem('ordenesAsignadas')) || [];
-        ordenesAsignadas.push(nuevaOrden);
-        localStorage.setItem('ordenesAsignadas', JSON.stringify(ordenesAsignadas));
-        console.log('Órdenes asignadas actualizadas:', ordenesAsignadas);
-    } else {
-        console.error('El turno seleccionado no está disponible.');
-    }
-}
-
-// Asociar función al botón
-document.getElementById('btnAsignarOrden').addEventListener('click', asignarNuevaOrden);
-
-
-
-
-
-
-
-*/
-document.addEventListener('DOMContentLoaded', function () {
-    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
-    const despachanteLogueado = usuarios.find(u => u.idUsuario === localStorage.getItem('usuarioLogueado'));
-
-    // Listado de usuarios
-    console.table(usuarios);
-    console.log("Usuarios cargados desde localStorage.");
-
-    if (!despachanteLogueado) {
-        console.error('No se encontró el usuario logueado.');
-        window.location.href = '../index.html';
-        return;
-    }
-
-    // Listado de ordenes antes de asignar
-    console.table(ordenes);
-    console.log("Órdenes cargadas antes de asignar.");
-    /*
-        document.getElementById('btnCrearOrden').addEventListener('click', function () {
-            const idOrden = generarIdOrden();
-            const operador = document.getElementById('selectOperador').value;
-            const tarea = document.getElementById('tarea').value;
-            const descripcion = document.getElementById('descripcion').value;
-            const comentario = document.getElementById('comentario').value;
-            const turno = document.getElementById('selectTurno').value;
-    
-            const nuevaOrden = {
-                idOrden,
-                operador,
-                tarea,
-                descripcion,
-                despachante: `${despachanteLogueado.nombre} ${despachanteLogueado.apellido}`,
-                comentario,
-                turno,
-                estadoDeHoja: 'disponible'
-            };
-    
-            ordenes.push(nuevaOrden);
-            localStorage.setItem('ordenes', JSON.stringify(ordenes));
-    
-            // Listado de ordenes después de asignar
-            console.table(ordenes);
-            console.log("Nueva orden creada y guardada en localStorage.");
-    
-            window.location.reload();
-        });
-    */
-    const operadoresDisponibles = usuarios.filter(u => u.alcance === 'Operador' && u.disponible);
-
-    // Listado de operadores disponibles
-    console.table(operadoresDisponibles);
-    console.log("Operadores disponibles cargados para asignación.");
-
-    const selectOperador = document.getElementById('selectOperador');
-    operadoresDisponibles.forEach(op => {
-        const option = document.createElement('option');
-        option.value = op.idUsuario;
-        option.textContent = `${op.nombre} ${op.apellido}`;
-        selectOperador.appendChild(option);
-    });
-});
-
-function generarIdOrden() {
-    let id = JSON.parse(localStorage.getItem('ordenes'))?.length + 1 || 1;
-    return `ORD-${id.toString().padStart(4, '0')}`;
-}
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     // Obtener el idUsuario del despachante logueado
     const idUsuario = localStorage.getItem('usuarioLogueado');
@@ -159,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let operadoresDisponibles = [];
     let idOrdenCounter = 1; // Contador para IDs de órdenes
     let nuevaOrden = null; // Inicialmente es null
+    let operadorSeleccionado = null; // Definir operadorSeleccionado
 
     // Inicializa los operadores disponibles
     operadoresDisponibles = usuarios.filter(usuario => usuario.alcance === 'operador' && usuario.disponible);
@@ -207,11 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
             inicializarNuevaOrden();
         }
         const operadorSeleccionadoId = selectOperador.value;
-        const operador = operadoresDisponibles.find(op => op.idUsuario === operadorSeleccionadoId);
-        if (operador) {
-            console.log('Operador seleccionado:', operador);
+        operadorSeleccionado = operadoresDisponibles.find(op => op.idUsuario === operadorSeleccionadoId); // Actualizar operadorSeleccionado
+        if (operadorSeleccionado) {
+            console.log('Operador seleccionado:', operadorSeleccionado);
             nuevaOrden.operador = operadorSeleccionadoId;
-            actualizarTurnos(operador);
+            actualizarTurnos(operadorSeleccionado);
         } else {
             console.log('Operador no encontrado');
         }
@@ -231,30 +101,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function convertirTurnosAArray(turnos) {
+        if (Array.isArray(turnos)) {
+            // Si ya es un array, no hacemos nada
+            return turnos;
+        } else if (typeof turnos === 'object') {
+            // Si es un objeto, convertimos sus valores en un array
+            return Object.values(turnos);
+        } else {
+            // Si no es un array ni un objeto, devolvemos un array vacío como fallback
+            console.error("Formato de turnos no reconocido:", turnos);
+            return [];
+        }
+    }
+
     function manejarCambioTurno(event) {
         if (!nuevaOrden) {
             inicializarNuevaOrden();
         }
         const botonClickeado = event.target;
         const turnoSeleccionado = botonClickeado.getAttribute('data-turno');
-        // Verifica si el turno está libre antes de asignarlo
+
+        // Verificar que `operadorSeleccionado` y `operadorSeleccionado.hojaDeRuta` estén definidos
+        if (!operadorSeleccionado || !operadorSeleccionado.hojaDeRuta || !Array.isArray(operadorSeleccionado.hojaDeRuta.turnos)) {
+            console.error('El operador seleccionado o la hoja de ruta no están definidos correctamente');
+            return;
+        }
+
+        // Asegurarse de que 'hojaDeRuta.turnos' sea un array
+        operadorSeleccionado.hojaDeRuta.turnos = Array.isArray(operadorSeleccionado.hojaDeRuta.turnos) ? operadorSeleccionado.hojaDeRuta.turnos : Object.values(operadorSeleccionado.hojaDeRuta.turnos);
+
         if (botonClickeado.classList.contains('btn-outline-primary')) {
             nuevaOrden.turno = turnoSeleccionado;
             console.log('Turno seleccionado:', turnoSeleccionado);
-            // Marcar el turno como ocupado en la interfaz
-            botonClickeado.innerHTML = 'Turno: ' + turnoSeleccionado;
             botonClickeado.classList.remove('btn-outline-primary');
-            botonClickeado.classList.add('btn-danger');
+            botonClickeado.classList.add('btn-primary');
         } else {
-            console.log('Este turno ya está ocupado, no se puede seleccionar');
+            nuevaOrden.turno = null;
+            botonClickeado.classList.remove('btn-primary');
+            botonClickeado.classList.add('btn-outline-primary');
         }
     }
 
     function asignarNuevaOrden() {
+        if (!operadorSeleccionado) {
+            console.error('No hay operador seleccionado');
+            return;
+        }
+
+        // Asegúrate de que `operadorSeleccionado.hojaDeRuta.turnos` sea un array
+        operadorSeleccionado.hojaDeRuta.turnos = convertirTurnosAArray(operadorSeleccionado.hojaDeRuta.turnos);
+
         if (nuevaOrden && nuevaOrden.operador && nuevaOrden.tarea.length && nuevaOrden.turno) {
             nuevaOrden.idOrden = idOrdenCounter++;
             ordenes.push(nuevaOrden);
             console.log('Nueva orden asignada:', nuevaOrden);
+
             // Actualizar el perfil del operador
             let operador = usuarios.find(op => op.idUsuario === nuevaOrden.operador);
             if (operador) {
@@ -262,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 operador.hojaDeRuta.turnos[nuevaOrden.turno] = 'ocupado';
                 operador.disponible = operador.hojaDeRuta.turnos.some(turno => turno === 'libre');
             }
+
             // Guardar cambios en localStorage
             localStorage.setItem('ordenes', JSON.stringify(ordenes));
             localStorage.setItem('usuarios', JSON.stringify(usuarios));
@@ -293,6 +196,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 boton.classList.add('btn-danger'); // Añade la clase roja para indicar que está ocupado
             }
         });
+    }
+
+    //Función para filtrar las ordenes por estado
+    document.getElementById('btnReasignadas').addEventListener('click', function () {
+        mostrarOrdenesPorEstado('reasignada');
+    });
+
+    document.getElementById('btnAsignadas').addEventListener('click', function () {
+        mostrarOrdenesPorEstado('asignada');
+    });
+
+    document.getElementById('btnCumplidas').addEventListener('click', function () {
+        mostrarOrdenesPorEstado('cumplida');
+    });
+
+    document.getElementById('btnCanceladas').addEventListener('click', function () {
+        mostrarOrdenesPorEstado('cancelada');
+    });
+
+    function mostrarOrdenesPorEstado(estado) {
+        // Suponiendo que las órdenes están almacenadas en localStorage como un array de objetos
+        let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
+
+        // Filtrar órdenes por estado
+        let ordenesFiltradas = ordenes.filter(orden => orden.estado === estado);
+
+        // Limpiar el contenido anterior de la tabla
+        let ordenesBody = document.getElementById('ordenesBody');
+        if (ordenesBody) {
+            ordenesBody.innerHTML = '';
+
+            // Insertar las filas correspondientes
+            ordenesFiltradas.forEach(orden => {
+                let fila = `
+                    <tr>
+                        <th scope="row">${orden.idOrden}</th>
+                        <td>${orden.descripcion}</td>
+                        <td>${orden.operador}</td>
+                        <td>${orden.estado}</td>
+                        <td><button class="btn btn-primary">Ver Detalles</button></td>
+                    </tr>
+                `;
+                ordenesBody.innerHTML += fila;
+            });
+        } else {
+            console.error('No se encontró el contenedor de la tabla de órdenes');
+        }
     }
 
     // Asignar manejadores de eventos

@@ -88,3 +88,39 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         console.log('Usuario o contraseña incorrectos');
     }
 });
+
+
+
+/*document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const usuarioIngresado = document.getElementById('usuarioLogin').value;
+    const contrasenaIngresada = document.getElementById('contrasenaLogin').value;
+
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    let usuarioEncontrado = usuarios.find(u => u.usuario === usuarioIngresado && u.contrasena === contrasenaIngresada);
+
+    if (usuarioEncontrado) {
+        // Marcar al usuario como conectado
+        usuarioEncontrado.conectado = true;
+
+        // Actualizar el estado del usuario en localStorage
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+        // Guardar el idUsuario del usuario logueado
+        localStorage.setItem('usuarioLogueado', usuarioEncontrado.idUsuario);
+
+        // Redirección según el rol del usuario
+        if (usuarioEncontrado.alcance.toLowerCase() === 'despachante') {
+            window.location.href = '../pages/despacho.html';
+        } else if (usuarioEncontrado.alcance.toLowerCase() === 'operador') {
+            window.location.href = '../pages/operador.html';
+        }
+
+    } else {
+        alert('Usuario o contraseña incorrectos');
+        console.log('Usuario o contraseña incorrectos');
+    }
+});
+*/

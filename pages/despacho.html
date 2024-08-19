@@ -31,11 +31,11 @@
             <div class="row justify-content-md-center">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <button id="btnLista" class="btn btn-warning">REASIGNADAS</button>
-                    <button id="btnNoDisponible" class="btn btn-primary">ASIGNADAS</button>
-                    <button id="btnDisponible" class="btn btn-success">CUMPLIDAS</button>
-                    <button id="btnNoDisponible" class="btn btn-danger">CANCELADAS</button>
-                    <button id="btnCerrarSesion" class="btn btn-secondary">STOCK</button>
+                    <button id="btnReasignadas" class="btn btn-warning">REASIGNADAS</button>
+                    <button id="btnAsignadas" class="btn btn-primary">ASIGNADAS</button>
+                    <button id="btnCumplidas" class="btn btn-success">CUMPLIDAS</button>
+                    <button id="btnCanceladas" class="btn btn-danger">CANCELADAS</button>
+                    <button id="btnStock" class="btn btn-secondary">STOCK</button>
                 </div>
             </div>
 
@@ -43,47 +43,22 @@
             <div class="row">
 
                 <!--LISTADO DE STOCK Y ORDENES SEGUN ELECCION DEL USUARIO A TRAVES DE LOS BOTONES-->
-
                 <div class="col-md-auto">
-                    <H4>LISTADO DE STOCK</H4>
+                    <h4>LISTADO DE ÓRDENES</h4>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">idProducto</th>
-                                <th scope="col">Material</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Reposicion</th>
+                                <th scope="col">ID Orden</th>
+                                <th scope="col">Tarea</th>
+                                <th scope="col">Despachante</th>
+                                <th scope="col">Operador</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><button class="btn btn-primary me-md-2" type="button">Reponer</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td><button class="btn btn-primary me-md-2" type="button">Reponer</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>@fat</td>
-                                <td><button class="btn btn-primary me-md-2" type="button">Reponer</button></td>
-                            </tr>
-
+                        <tbody id="ordenes-tbody">
+                            <!-- Las órdenes se insertarán aquí -->
                         </tbody>
                     </table>
-
                 </div>
-
                 <!--FORMULARIO PARA LA GESTION DE ORDENES-->
 
                 <div class="col">
@@ -205,7 +180,8 @@
 
 
     <script src="../js/cerrarSesion.js"></script>
-    <script src="../js/despacho.js"></script>
+    <script src="../js/despacho4.js"></script>
+    <script src="../js/listadosDeOrdenes.j"></script>
 
 </body>
 
